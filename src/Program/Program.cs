@@ -4,7 +4,6 @@
 // </copyright>
 //-------------------------------------------------------------------------
 
-using System;
 using System.Collections;
 using System.Linq;
 using Full_GRASP_And_SOLID.Library;
@@ -26,9 +25,15 @@ namespace Full_GRASP_And_SOLID
             recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
             recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
 
-            AllInOnePrinter printer = new AllInOnePrinter();
-            printer.PrintRecipe(recipe, Destination.Console);
-            printer.PrintRecipe(recipe, Destination.File);
+            /*
+            Use Polymorphism para crear un tipo IPrinter 
+            y luego cree las clases PrintInConsole y PrintInFile, 
+            para asi evitar preguntar el destino de la impresion.
+            */
+            PrintInFile printerFile = new PrintInFile();
+            PrintInConsole printerConsole = new PrintInConsole();
+            printerFile.PrintRecipe(recipe);
+            printerConsole.PrintRecipe(recipe);
         }
 
         private static void PopulateCatalogs()
